@@ -88,3 +88,12 @@ export const getProfile = asyncHandler(async (req, res, next) => {
     responseData: profile,
   });
 });
+
+export const getOtherUsers = asyncHandler(async (req, res, next) => {
+  const userId = req.user._id;
+  const otherUsers = await User.find({ _id: { $ne: userId } });
+  res.status(200).json({
+    success: true,
+    responseData: otherUsers,
+  });
+});
